@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -30,8 +31,12 @@ class AccelerometerGravityGame extends Forge2DGame {
     await super.onLoad();
     createBalls();
     world.addAll(balls);
+    final double platformMultiplier = Platform.isIOS ? 1.0 : 3.0;
     accelerometerEvents.listen((AccelerometerEvent event) {
-      final gravityVector = Vector2(-event.x * 50 * 3, event.y * 80 * 3);
+      final gravityVector = Vector2(
+        -event.x * 50 * platformMultiplier,
+        event.y * 80 * platformMultiplier,
+      );
       WidgetsBinding.instance.addPostFrameCallback((_) {
         updateObjectGravity(gravityVector);
       });
