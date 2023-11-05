@@ -31,7 +31,7 @@ class AccelerometerGravityGame extends Forge2DGame {
     await super.onLoad();
     createBalls();
     world.addAll(balls);
-    final double platformMultiplier = Platform.isIOS ? 1.0 : 3.0;
+    final double platformMultiplier = Platform.isIOS ? 1.5 : 3.0;
     accelerometerEvents.listen((AccelerometerEvent event) {
       final gravityVector = Vector2(
         -event.x * 50 * platformMultiplier,
